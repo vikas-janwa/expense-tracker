@@ -55,30 +55,8 @@
   </div>
 
   <div class="content">
-    <h1 class="text-center">Welcome to your dashboard</h1>
-    <p class="text-center">This is a simple dashboard template using Bootstrap 5.</p>
-    <div class="row">
-      <div class="col-md-4">
-        <div class="card mb-4">
-          <div class="card-header">
-            Card Title
-          </div>
-          <div class="card-body">
-            Some text inside the card.
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card mb-4">
-          <div class="card-header">
-            Card Title
-          </div>
-          <div class="card-body">
-            Some text inside the card.
-          </div>
-        </div>
-      </div>
-    </div>
+    <h1 class="text-center">Profile</h1>
+    <p class="text-center"><b>User: </b>{{ auth()->user()['name'] }}</p>
   </div>
 
   <!-- Bootstrap JS -->

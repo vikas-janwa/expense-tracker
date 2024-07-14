@@ -55,30 +55,45 @@
   </div>
 
   <div class="content">
-    <h1 class="text-center">Welcome to your dashboard</h1>
-    <p class="text-center">This is a simple dashboard template using Bootstrap 5.</p>
-    <div class="row">
-      <div class="col-md-4">
-        <div class="card mb-4">
-          <div class="card-header">
-            Card Title
-          </div>
-          <div class="card-body">
-            Some text inside the card.
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card mb-4">
-          <div class="card-header">
-            Card Title
-          </div>
-          <div class="card-body">
-            Some text inside the card.
-          </div>
-        </div>
-      </div>
+    <h1 class="mb-4">Expenses</h1>
+    <div class="text-end">
+        <a type="button" class="btn btn-primary me-2" href="{{ route('expenses.getCreate') }}">Add Expense</a>
     </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Created at</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($expenses as $expense)
+                <tr>
+                    <th scope="row">{{ $loop->iteration }}</th>
+                    <td>{{ $expense->name }}</td>
+                    <td>{{ $expense->description }}</td>
+                    <td>${{ number_format($expense->amount, 2) }}</td>
+                    <td>{{ $expense->created_at->format('Y-m-d H:i') }}</td>
+                    <td>
+                        @if(auth()->user()->id === $expense->user_id)
+                            <form action="{{ route('expenses.destroy', $expense->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this expense?');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        @else
+                            <button type="button" class="btn btn-secondary btn-sm" disabled>Delete</button>
+                        @endif
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+
   </div>
 
   <!-- Bootstrap JS -->

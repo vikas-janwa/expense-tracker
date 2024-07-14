@@ -55,31 +55,43 @@
   </div>
 
   <div class="content">
-    <h1 class="text-center">Welcome to your dashboard</h1>
-    <p class="text-center">This is a simple dashboard template using Bootstrap 5.</p>
-    <div class="row">
-      <div class="col-md-4">
-        <div class="card mb-4">
-          <div class="card-header">
-            Card Title
-          </div>
-          <div class="card-body">
-            Some text inside the card.
-          </div>
+  <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Create Expense</h4>
+                    </div>
+                    <div class="card-body">
+                        <form action="/expenses" method="POST">
+                            @csrf
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" class="form-control" id="name" name="name" required>
+                                @error('name')
+                                    <div class="error">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="description">Description</label>
+                                <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+                                @error('description')
+                                    <div class="error">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="amount">Amount</label>
+                                <input type="number" class="form-control" id="amount" name="amount" required>
+                                @error('amount')
+                                    <div class="error">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <button type="submit" class="btn btn-primary">Create Expense</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card mb-4">
-          <div class="card-header">
-            Card Title
-          </div>
-          <div class="card-body">
-            Some text inside the card.
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+</div>
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
